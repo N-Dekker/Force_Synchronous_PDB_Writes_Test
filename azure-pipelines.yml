@@ -1,0 +1,12 @@
+jobs:
+- job: VS2019
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - script: |
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+      mkdir build
+      cd build
+      cmake .. -G "Visual Studio 16 2019"
+      MSBuild.exe Force_Synchronous_PDB_Writes_Test.sln
+      type Force_Synchronous_PDB_Writes_Test.vcxproj
